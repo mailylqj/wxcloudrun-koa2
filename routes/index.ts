@@ -1,12 +1,10 @@
 import * as Router from 'koa-router';
+import countRouter from './count';
+import retailRouter from './retail';
+
 const router = new Router();
 
-router.get('/', async (ctx, next) => {
-	const titleTxt = 'hello koa';
-	await ctx.render('index', {
-		title: titleTxt,
-		content: 'kkkkk'
-	});
-});
+router.use('/api', countRouter.routes(), countRouter.allowedMethods());
+router.use('/retail', retailRouter.routes(), retailRouter.allowedMethods());
 
-module.exports = router;
+export default router;
